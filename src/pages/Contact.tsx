@@ -1,9 +1,15 @@
 // pages/Contact.tsx
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
+import Header from "../layout/Header";
 
 const Contact = () => {
   const { t } = useTranslation();
-  return <h1>{t("contact")}</h1>;
+  return (
+    <div>
+      <Header />
+      <h1>{t("contact")}</h1>
+    </div>
+  );
 };
 
 export default Contact;

@@ -1,30 +1,30 @@
-// index.tsx
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import './index.css';
+import { StrictMode, Suspense } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import "./i18n";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import MainContent from './pages/MainContent';
-import LanguageSwitcher from './utils/LanguageSwitcher';
-import './i18n'
 
-// Creation du routeur 
-const router = createBrowserRouter([
+const route=createBrowserRouter([
   {
-    path: "/:lng?/*", // definition du langue
-    element: (
-      <>
-      
-        <LanguageSwitcher />
-        <MainContent />
-      </>
-    ),
+    path:"/",
+    element:<Home/>
   },
-]);
-
-// Rendu de l'application
-createRoot(document.getElementById('root')!).render(
+  {
+    path:"/about",
+    element:<About/>
+  },{
+    path:"/contact",
+    element:<Contact/>
+  }
+])
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Suspense fallback={<span className="loader"></span>}>
+      <RouterProvider router={route}/>
+    </Suspense>
   </StrictMode>
 );
